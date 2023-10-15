@@ -7,7 +7,7 @@ export const AppDataSource = new DataSource({
   username: 'postgres',
   password: '102030',
   database: 'quicksalesdb',
-  entities: ['./src/modules/**/*.{ts,js}'],
+  entities: ['./src/modules/**/models/*.{ts,js}'],
   // subscribers: [],
   migrations: ['./src/modules/**/migrations/*.{ts,js}']
 })
