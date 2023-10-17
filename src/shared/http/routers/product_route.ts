@@ -5,4 +5,6 @@ const productController = new ProductController()
 
 export default (router: Router): void => {
   router.post('/products', productController.addProduct)
+  router.get('/products', productController.loadProducts)
+  router.get('/products/:id', productController.loadProductById)
 }
