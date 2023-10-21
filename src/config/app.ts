@@ -1,13 +1,21 @@
 import 'express-async-errors'
+import 'reflect-metadata'
+import { errors } from 'celebrate'
 import express, { NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 
 import AppError from '@shared/errors/app_error'
+import routeSetup from './routes'
 import route from '@shared/http/routers'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+routeSetup(app)
+
+app.use(errors()) // para capturar os error na requisição
+
+// Middleware para capturar de error de execução
 app.use(route)
 
 // Middleware para captura de error
