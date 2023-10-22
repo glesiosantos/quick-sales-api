@@ -8,7 +8,6 @@ export const AppDataSource = new DataSource({
   password: '102030',
   database: 'quicksalesdb',
   entities: ['./src/modules/**/models/*.{ts,js}'],
-  entities: ['./src/modules/**/*.{ts,js}'],
   // subscribers: [],
   migrations: ['./src/modules/**/migrations/*.{ts,js}']
 })

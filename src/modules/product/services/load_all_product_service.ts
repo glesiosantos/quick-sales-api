@@ -1,9 +1,9 @@
 import { AppDataSource } from '@config/app_data_source'
-import Product from '../models/product'
+import ProductModel from '../models/product'
 
 export class LoadAllProductService {
-  async loadAll(): Promise<Product[] | null> {
-    const productRepository = AppDataSource.getRepository(Product)
+  async loadAll(): Promise<ProductModel[] | null> {
+    const productRepository = AppDataSource.getRepository(ProductModel)
     const products = await productRepository.find()
     return products
   }
