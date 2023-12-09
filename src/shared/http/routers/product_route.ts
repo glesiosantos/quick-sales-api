@@ -10,6 +10,7 @@ export default (router: Router): void => {
     celebrate({
       [Segments.BODY]: {
         name: Joi.string().required(),
+        description: Joi.string(),
         quantity: Joi.number().required(),
         price: Joi.number().precision(2).required()
       }
