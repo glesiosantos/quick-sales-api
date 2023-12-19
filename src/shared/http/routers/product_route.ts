@@ -1,4 +1,4 @@
-import { celebrate, Joi, Segments} from 'celebrate'
+import { celebrate, Joi, Segments } from 'celebrate'
 import { ProductController } from '@modules/product/controllers/product_controller'
 import { Router } from 'express'
 
@@ -19,11 +19,11 @@ export default (router: Router): void => {
   )
   router.get('/products', productController.loadProducts)
   router.get(
-    '/products/:id', 
+    '/products/:id',
     celebrate({
       [Segments.PARAMS]: {
         id: Joi.string().required()
       }
-    }), 
+    }),
     productController.loadProductById)
 }
