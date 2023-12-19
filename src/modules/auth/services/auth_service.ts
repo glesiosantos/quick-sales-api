@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import { AppDataSource } from '@config/app_data_source'
 import { AccountModel } from '../models/account'
 import AppError from '@shared/errors/app_error'
+import authConfig from '@config/auth_config'
 
 type AccountAuthenticationModel = {
   email: string
@@ -20,7 +21,7 @@ export class AuthenticationService {
 
     if (!comparedHash) throw new AppError('Incorrect email/password', 401)
 
-    const accessToken = jwt.sign({}, 'accoe56d80c09aef1a6e098ea37fc7e63e79ec63c86a0d6b30069f8fe94f71291023unt', { subject: account.id, expiresIn: '1d' })
+    const accessToken = jwt.sign({}, authConfig.jwt.secret, { subject: account.id, expiresIn: authConfig.jwt.expiresIn })
     return accessToken
   }
 }
