@@ -1,12 +1,14 @@
 import { celebrate, Joi, Segments } from 'celebrate'
 import { ProductController } from '@modules/product/controllers/product_controller'
 import { Router } from 'express'
+import isAuthenticated from '@modules/auth/middlewares/is_authenticated'
 
 const productController = new ProductController()
 
 export default (router: Router): void => {
   router.post(
     '/products',
+    isAuthenticated,
     celebrate({
       [Segments.BODY]: {
         name: Joi.string().required(),
@@ -17,7 +19,7 @@ export default (router: Router): void => {
     }),
     productController.addProduct
   )
-  router.get('/products', productController.loadProducts)
+  router.get('/products', isAuthenticated, productController.loadProducts)
   router.get(
     '/products/:id',
     celebrate({
