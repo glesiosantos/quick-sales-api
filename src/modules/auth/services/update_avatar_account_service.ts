@@ -7,7 +7,7 @@ import { AccountModel } from '@modules/auth/models/account'
 
 type AvatarAccountModel = {
   id: string
-  avatar: string
+  avatar?: string
 }
 
 export class UpdateAvatarAccountService {
@@ -24,8 +24,13 @@ export class UpdateAvatarAccountService {
       if (avatarAccountExists) {
         await fs.promises.unlink(avatarAccount) // apagar o arquivo
       }
-    }
 
-    account.avatar = data.id
+      await accountRepository
+        .createQueryBuilder()
+        .update(AccountModel)
+        .set({
+          avatar: data.id
+        }).where({ id: data.id }).execute()
+    }
   }
 }

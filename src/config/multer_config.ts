@@ -10,8 +10,7 @@ export default {
     {
       destination: uploadFolder,
       filename(request: Request, file, callback) {
-        console.log(file.filename)
-        const filename = `${request.user.id} `
+        const filename = `${request.user.id}.${file.originalname.split('.').pop()}`
         callback(null, filename)
       }
     })
