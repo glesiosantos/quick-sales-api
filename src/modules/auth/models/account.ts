@@ -1,28 +1,25 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity('accounts')
-export default class AccountModel {
+export class AccountModel {
     @PrimaryGeneratedColumn()
     id: string
 
     @Column()
-    username: string
-    
+    name: string
+
     @Column()
     email: string
 
-    @Column({name: 'is_active'})
-    isActive: boolean
-
-    @Column({name: 'is_admin'})
-    isAdmin: boolean
-    
     @Column()
     password: string
 
-    @CreateDateColumn({name: 'created_at', type: 'timestamp'})
+    @Column({ name: 'is_admin' })
+    isAdmin: boolean
+
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: Date
 
-    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp'})
-    updatedAt: Date 
+    @UpdateDateColumn({ name: 'updated_at' })
+    updatedAt: Date
 }
