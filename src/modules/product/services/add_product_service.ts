@@ -1,7 +1,7 @@
 import { AppDataSource } from '@config/app_data_source'
-import Product from '../models/product'
+import ProductModel from '../models/product'
 
-type ProductModel = {
+type AddProductModel = {
   name: string
   description: string
   quantity: number
@@ -9,9 +9,9 @@ type ProductModel = {
 }
 
 export class AddProductService {
-  async add(productModel: ProductModel): Promise<Product> {
-    const productRepository = AppDataSource.getRepository(Product)
-    const product = productRepository.create(productModel)
+  async add(addProductModel: AddProductModel): Promise<ProductModel> {
+    const productRepository = AppDataSource.getRepository(ProductModel)
+    const product = productRepository.create(addProductModel)
     const result = await productRepository.save(product)
     return result
   }
