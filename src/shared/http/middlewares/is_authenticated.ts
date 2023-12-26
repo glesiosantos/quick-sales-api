@@ -3,6 +3,10 @@ import AppError from '@shared/errors/app_error'
 import { NextFunction, Request, Response } from 'express'
 import authConfig from '@config/auth_config'
 
+export type TokenPayload = {
+  sub: string
+}
+
 export default function isAuthenticated(request: Request, response: Response, next: NextFunction): void {
   const authHeader = request.headers.authorization
 
@@ -12,7 +16,11 @@ export default function isAuthenticated(request: Request, response: Response, ne
 
   try {
     const decode = jwt.verify(token, authConfig.jwt.secret)
-    console.log(decode)
+    const { sub } = decode
+
+    request.user = {
+      id: sub as string
+    }
   } catch (error) {
     throw new AppError('Invalid JWT Token', 401)
   }
