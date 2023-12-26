@@ -2,24 +2,27 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 
 @Entity('accounts')
 export class AccountModel {
-    @PrimaryGeneratedColumn()
-    id: string
+  @PrimaryGeneratedColumn()
+  id: string
 
-    @Column()
-    name: string
+  @Column()
+  name: string
 
-    @Column()
-    email: string
+  @Column()
+  avatar: string
 
-    @Column()
-    password: string
+  @Column()
+  email: string
 
-    @Column({ name: 'is_admin' })
-    isAdmin: boolean
+  @Column()
+  password: string
 
-    @CreateDateColumn({ name: 'created_at' })
-    createdAt: Date
+  @Column({ name: 'is_admin' })
+  isAdmin: boolean
 
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Date
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date
 }
