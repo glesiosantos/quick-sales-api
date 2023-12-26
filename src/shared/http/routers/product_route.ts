@@ -1,7 +1,7 @@
 import { celebrate, Joi, Segments } from 'celebrate'
 import { ProductController } from '@modules/product/controllers/product_controller'
 import { Router } from 'express'
-import isAuthenticated from '@modules/auth/middlewares/is_authenticated'
+import isAuthenticated from '@shared/http/middlewares/is_authenticated'
 
 const productController = new ProductController()
 
