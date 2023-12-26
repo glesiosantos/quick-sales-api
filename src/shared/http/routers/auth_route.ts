@@ -1,34 +1,18 @@
-import { celebrate, Joi, Segments} from 'celebrate'
-import { ProductController } from '@modules/product/controllers/product_controller'
+import { AuthController } from '@modules/auth/controllers/auth_controller'
+import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
-import { SignUpController } from '@modules/auth/controllers/signup_controller'
-import { SignInController } from '@modules/auth/controllers/signin_controller'
 
-const signUpController = new SignUpController() 
-const signinController = new SignInController()
+const authController = new AuthController()
 
 export default (router: Router): void => {
   router.post(
-    '/signin',
+    '/auth/signin',
     celebrate({
       [Segments.BODY]: {
-        email: Joi.string().required(),
+        email: Joi.string().email().required(),
         password: Joi.string().required()
       }
     }),
-    signinController.handle
+    authController.authentication
   )
-  router.post(
-    '/signup',
-    celebrate({
-      [Segments.BODY]: {
-        username: Joi.string().required(),
-        email: Joi.string().required(),
-        password: Joi.string().required(),
-        passwordConfirmation: Joi.string().required()
-      }
-    }),
-    signUpController.handle
-  )
-
 }

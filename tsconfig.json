@@ -17,6 +17,10 @@
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "typeRoots": [
+      "./src/@types",
+      "./node_modules/@types"
+    ],
     "baseUrl": "./",
     "paths": {
       "@config/*": [
