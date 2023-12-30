@@ -18,7 +18,12 @@ export class AuthController {
 
   async resetPassword(request: Request, response: Response): Promise<Response> {
     const resetPasswordService = new ResetPasswordService()
-    await resetPasswordService.reset(request.body)
+
+    const token = request.params.token
+    console.log(token)
+    const { password } = request.body
+
+    await resetPasswordService.reset({ token, password })
     return response.status(204).json()
   }
 }

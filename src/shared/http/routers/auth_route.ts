@@ -24,13 +24,14 @@ export default (router: Router): void => {
     }),
     authController.forgot
   )
-  router.post(
-    '/auth/forgot',
+  router.put(
+    '/auth/reset/:token',
     celebrate({
       [Segments.BODY]: {
-        email: Joi.string().email().required()
+        password: Joi.string().required(),
+        passwordConfirmation: Joi.string().required().valid(Joi.ref('password')) // validando informações
       }
     }),
-    authController.forgot
+    authController.resetPassword
   )
 }

@@ -6,9 +6,7 @@ import { AccountModel } from '../models/account'
 import { addHours, isAfter } from 'date-fns'
 
 export type AccountTokenVerifyModel = {
-    email: string
     token: string
-    accountId: string
     password: string
 }
 
@@ -19,26 +17,26 @@ export class ResetPasswordService {
 
         // Validar token de acesso
 
-        const existsToken = await tokenRepository.findOneBy({ token: data.token })
+        const accountToken = await tokenRepository.find({ where: { token: data.token }, relations: { account: true } })
 
-        if (!existsToken) throw new AppError('Token not found')
+        if (!accountToken) throw new AppError('Token not found')
 
         // Verificar se existe usuário
 
-        const account = await accountRepository.findOneBy({ id: data.accountId })
+        const account = await accountRepository.findOneBy({ id: accountToken[0].account.id })
 
         if (!account) throw new AppError('Account not found')
 
-        const tokenCreatedAtValid = addHours(existsToken.createdAt, 2)
+        const tokenCreatedAtValid = addHours(accountToken[0].createdAt, 2)
+        console.log(tokenCreatedAtValid)
 
-        if (isAfter(Date.now(), tokenCreatedAtValid)) throw new AppError('Expired token')
+        if (isAfter(Date.now(), tokenCreatedAtValid.toISOString())) throw new AppError('Expired token')
         const hash = await bcrypt.hash(data.password, 12)
 
         await accountRepository.createQueryBuilder()
           .update(AccountModel)
           .set({
-            password: hash,
-            updatedAt: Date.now()
+            password: hash
           }).where({ id: account.id }).execute()
     }
 }
