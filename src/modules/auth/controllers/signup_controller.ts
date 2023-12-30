@@ -1,18 +1,10 @@
-import { Request, Response } from "express";
-import { AuthService } from "../services/auth_service";
+import { Request, Response } from 'express'
+import { AddAccountService } from '../services/add_account_service'
 
 export class SignUpController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const authService = new AuthService()
-
-        const {username, email, password, passwordConfirmation} = request.body
-
-        // if (password !== passwordConfirmation) {
-        //     throw new Error('Senha não confere')
-        // }
-
-        const account = await authService.add({username, email, password, isAdmin: true, isActive : true})
-
-        return response.json({account}).status(201)
+        const authService = new AddAccountService()
+        await authService.add(request.body)
+        return response.status(201).json()
     }
 }

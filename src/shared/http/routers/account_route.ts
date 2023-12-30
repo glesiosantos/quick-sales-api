@@ -11,7 +11,8 @@ export default (router: Router): void => {
       [Segments.BODY]: {
         name: Joi.string().required(),
         email: Joi.string().email().required(),
-        password: Joi.string().required()
+        password: Joi.string().required(),
+        idAdmin: Joi.boolean().default(false)
       }
     }),
     accountController.addAccount

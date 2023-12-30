@@ -15,4 +15,22 @@ export default (router: Router): void => {
     }),
     authController.authentication
   )
+  router.post(
+    '/auth/forgot',
+    celebrate({
+      [Segments.BODY]: {
+        email: Joi.string().email().required()
+      }
+    }),
+    authController.forgot
+  )
+  router.post(
+    '/auth/forgot',
+    celebrate({
+      [Segments.BODY]: {
+        email: Joi.string().email().required()
+      }
+    }),
+    authController.forgot
+  )
 }

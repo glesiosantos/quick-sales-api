@@ -1,13 +1,11 @@
-import { AppDataSource } from "@config/app_data_source";
-import AccountModel from "../models/account";
-import { AddAccountModel, AddAccountService } from "./protocols/add_account_service";
-import { LoadAccountByEmailService } from "./protocols/load_account_by_email_service";
+import { AppDataSource } from '@config/app_data_source'
+import { AccountModel } from '../models/account'
+import { LoadAccountByEmailService } from './protocols/load_account_by_email_service'
 
 export class AccountService implements LoadAccountByEmailService {
-    
     async loadByEmail(email: string): Promise<AccountModel | null> {
         const accountRepository = AppDataSource.getRepository(AccountModel)
-        const account = await accountRepository.findOneBy({email})
+        const account = await accountRepository.findOneBy({ email })
         return account ?? null
     }
 }
