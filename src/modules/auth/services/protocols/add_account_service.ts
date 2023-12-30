@@ -1,4 +1,4 @@
-import AccountModel from "../../models/account";
+import { AccountModel } from '../../models/account'
 
 export type AddAccountModel = {
     username: string
@@ -9,5 +9,5 @@ export type AddAccountModel = {
 }
 
 export interface AddAccountService {
-    add(addAccountModel: AddAccountModel): Promise<AccountModel>
+    add: (addAccountModel: AddAccountModel) => Promise<AccountModel>
 }

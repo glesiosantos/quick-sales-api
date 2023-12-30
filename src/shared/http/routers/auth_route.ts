@@ -15,4 +15,23 @@ export default (router: Router): void => {
     }),
     authController.authentication
   )
+  router.post(
+    '/auth/forgot',
+    celebrate({
+      [Segments.BODY]: {
+        email: Joi.string().email().required()
+      }
+    }),
+    authController.forgot
+  )
+  router.put(
+    '/auth/reset/:token',
+    celebrate({
+      [Segments.BODY]: {
+        password: Joi.string().required(),
+        passwordConfirmation: Joi.string().required().valid(Joi.ref('password')) // validando informações
+      }
+    }),
+    authController.resetPassword
+  )
 }
