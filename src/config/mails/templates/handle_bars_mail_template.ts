@@ -1,11 +1,12 @@
 import handlebars from 'handlebars'
+import fs from 'fs'
 
 export type MailTemplateVariabelModel = {
   [key: string]: string | number
 }
 
 export type MailTemplateModel = {
-  templateHtml: string
+  file: string
   variables: MailTemplateVariabelModel[]
 }
 
@@ -23,7 +24,8 @@ export type SendMailModel = {
 
 export default class HandleBarsMailTemplate {
   public async parseHTML(template: MailTemplateModel): Promise<string> {
-    const parserTemplate = handlebars.compile(template.templateHtml)
+    const templateFileContent = await fs.promises.readFile(template.file, { encoding: 'utf-8' })
+    const parserTemplate = handlebars.compile(templateFileContent)
     return parserTemplate(template.variables)
   }
 }

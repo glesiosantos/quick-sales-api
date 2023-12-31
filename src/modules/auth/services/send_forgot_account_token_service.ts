@@ -1,3 +1,4 @@
+import path from 'path'
 import { AppDataSource } from '@config/app_data_source'
 import { AccountModel } from '../models/account'
 import { AccountTokenModel } from '../models/account_token'
@@ -29,11 +30,11 @@ export class SendForgotAccountTokenService {
         to: { name: account.name, email: account.email },
         subject: '[Quick Sales] Recuperação de senha',
         templateData: {
-          templateHtml: `Solicitação de redefinição de senha recebida /api/auth/reset/${accountTokenActive?.token}`,
+          file: path.resolve(__dirname, '..', 'views/forgot_passwd.hbs'),
           variables:
             [{
               name: account.name,
-              token: accountTokenActive?.token as string
+              link: `http://localhost:3000/api/auth/reset/${accountTokenActive?.token}`
             }]
         }
       })
