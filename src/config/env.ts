@@ -9,9 +9,9 @@ export default {
   authUserPasswd: '6QyyC3rQpurnzctA3S',
 
   // setting db
-  hostDb: 'localhost',
-  portDb: 5432,
-  usernameDb: 'postgres',
-  passwdDb: '102030',
-  dbName: 'quicksalesdb'
+  hostDb: process.env.HOSTDB,
+  portDb: process.env.HOSTDB,
+  usernameDb: process.env.USERDB,
+  passwdDb: process.env.PASSWDDB,
+  dbName: process.env.DBNAME
 }

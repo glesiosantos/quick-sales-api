@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { AppDataSource } from '@config/app_data_source'
 
 AppDataSource.initialize()
