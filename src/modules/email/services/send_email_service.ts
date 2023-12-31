@@ -1,3 +1,5 @@
+import env from '@config/env'
+import createAccountFake from '@config/tranporter_nodemailer_config'
 import nodemailer from 'nodemailer'
 
 export type SendMailModel = {
@@ -9,19 +11,9 @@ export type SendMailModel = {
 
 export class SendEmailService {
   async sendMailTest(data: SendMailModel): Promise<void> {
-    const account = await nodemailer.createTestAccount()
-    const transporter = nodemailer.createTransport({
-      host: account.smtp.host,
-      port: account.smtp.port,
-      secure: account.smtp.secure,
-      auth: {
-        user: account.user,
-        pass: account.pass
-      }
-
-    })
+    const transporter = await createAccountFake()
     const message = transporter.sendMail({
-      from: 'support@quicksales.com.br',
+      from: env.emailDefaultBySend,
       to: data.to,
       subject: data.subject,
       text: data.body

@@ -6,7 +6,7 @@
   "author": "Glêsio Santos <glesioss@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
+    "dev": "export NODE_ENV=dev && ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/config/app_data_source.ts",
     "migration:revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/config/app_data_source.ts"
   },
