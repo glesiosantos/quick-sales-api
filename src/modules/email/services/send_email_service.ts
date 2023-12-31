@@ -1,22 +1,17 @@
 import env from '@config/env'
-import createAccountFake from '@config/tranporter_nodemailer_config'
+import HandleBarsMailTemplate, { SendMailModel } from '@config/mails/templates/handle_bars_mail_template'
+import createAccountFake from '@config/mails/tranporter_nodemailer_config'
 import nodemailer from 'nodemailer'
 
-export type SendMailModel = {
-  to: string
-  from?: string
-  subject: string
-  body?: any
-}
-
 export class SendEmailService {
-  async sendMailTest(data: SendMailModel): Promise<void> {
+  async sendMailTest(send: SendMailModel): Promise<void> {
+    const mailTemplate = new HandleBarsMailTemplate()
     const transporter = await createAccountFake()
     const message = transporter.sendMail({
       from: env.emailDefaultBySend,
-      to: data.to,
-      subject: data.subject,
-      text: data.body
+      to: send.to.email,
+      subject: send.subject,
+      html: await mailTemplate.parseHTML(send.templateData)
     })
 
     console.log('Message sent: %s', (await message).messageId)

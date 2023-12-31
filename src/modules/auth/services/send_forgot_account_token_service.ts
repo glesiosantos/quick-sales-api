@@ -23,12 +23,19 @@ export class SendForgotAccountTokenService {
 
         const accountToken = tokenRepository.create({ account })
         const result = await tokenRepository.save(accountToken)
-        const accountTokenActive = await tokenRepository.findOneBy({ id: result.id })
+        const accountTokenActive = await tokenRepository.findOneBy({ id: result.id }) // recuperar token
 
-        await sendMailService.sendMailTest({
-          to: data.email,
-          subject: 'Redifinir senha',
-          body: `Solicitação de redefinição de senha recebida /api/auth/reset/${accountTokenActive?.token}`
-        })
+      await sendMailService.sendMailTest({
+        to: { name: account.name, email: account.email },
+        subject: '[Quick Sales] Recuperação de senha',
+        templateData: {
+          templateHtml: `Solicitação de redefinição de senha recebida /api/auth/reset/${accountTokenActive?.token}`,
+          variables:
+            [{
+              name: account.name,
+              token: accountTokenActive?.token as string
+            }]
+        }
+      })
     }
 }
