@@ -17,4 +17,19 @@ export default (router: Router): void => {
     }),
     accountController.addAccount
   )
+  router.post(
+    '/accounts/update',
+    celebrate({
+      [Segments.BODY]: {
+        name: Joi.string().required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().required()
+      }
+    }),
+    accountController.addAccount
+  )
+  router.get(
+    '/accounts/profile/:id',
+    accountController.addAccount
+  )
 }
