@@ -15,6 +15,11 @@ export default (router: Router): void => {
     isAuthenticated,
     orderController.deleteOrders
   )
+  router.put(
+    '/orders/to/:id',
+    isAuthenticated,
+    orderController.convertBudgetToOrder
+  )
   router.get(
     '/orders',
     isAuthenticated,
