@@ -1,4 +1,4 @@
-import { CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { OrderItem } from './order_item'
 import { Customer } from './../../customer/models/customer'
 
@@ -14,9 +14,9 @@ export class Order {
   @OneToMany(() => OrderItem, item => item.order)
   itens: OrderItem[]
 
+  @Column({ name: 'is_budget' })
+  isBudget: boolean
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date
 }

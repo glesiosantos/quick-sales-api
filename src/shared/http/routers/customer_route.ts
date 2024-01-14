@@ -23,4 +23,8 @@ export default (router: Router): void => {
     '/customers/:phone',
     customerController.loadCustomerByPhone
   )
+  router.get(
+    '/customers/order',
+    customerController.loadCustomerByPhone
+  )
 }

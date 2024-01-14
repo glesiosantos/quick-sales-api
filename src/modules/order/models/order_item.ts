@@ -14,6 +14,9 @@ export class OrderItem {
   @Column()
   quantity: number
 
+  @Column()
+  price: number
+
   @ManyToOne(() => Order)
   @JoinColumn({ name: 'order_id' })
   order: Order

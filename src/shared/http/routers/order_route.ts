@@ -8,4 +8,12 @@ export default (router: Router): void => {
     '/orders',
     orderController.saveOrder
   )
+  router.get(
+    '/orders',
+    orderController.loadAllOrders
+  )
+  router.post(
+    '/orders/customer',
+    orderController.loadOrderByCustomer
+  )
 }
