@@ -19,5 +19,10 @@ export default {
 
   // JWT SETTINGS
   jwtSecret: process.env.JWTSECRET,
-  expiresInJwt: process.env.EXPIRESINJWT
+  expiresInJwt: process.env.EXPIRESINJWT,
+
+  // redis
+  redisHost: process.env.REDIS_HOST,
+  redisPort: process.env.REDIS_PORT,
+  redisPass: process.env.REDIS_PASS || undefined
 }
