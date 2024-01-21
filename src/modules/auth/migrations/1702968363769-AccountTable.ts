@@ -1,7 +1,6 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
 
 export class AccountTable1702968363769 implements MigrationInterface {
-
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
             CREATE TABLE IF NOT EXISTS accounts(
@@ -20,5 +19,4 @@ export class AccountTable1702968363769 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('accounts')
   }
-
 }
