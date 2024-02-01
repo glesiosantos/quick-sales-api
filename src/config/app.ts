@@ -6,11 +6,13 @@ import cors from 'cors'
 
 import AppError from '@shared/errors/app_error'
 import routeSetup from './routes'
+import apolloServerSetup from './apollo_server'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 routeSetup(app)
+apolloServerSetup(app)
 
 app.use(errors()) // para capturar os error na requisição
 
